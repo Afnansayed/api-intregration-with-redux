@@ -6,12 +6,15 @@ import { useState, type FormEvent } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Eye, EyeOff } from "lucide-react"
+import { useAppDispatch } from "@/redux/hooks"
+import { addUser } from "@/redux/slice/userSlice"
 
 export default function RegisterPage() {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const dispatch = useAppDispatch();
 
     // Form state
     const [formData, setFormData] = useState({
@@ -114,6 +117,9 @@ export default function RegisterPage() {
         try {
             // This would be replaced with your actual registration API call
             console.log(formData)
+            const data = { ...formData, id: 1, confirmPassword: formData.password_confirmation }
+
+            dispatch(addUser(data))
 
             // Simulate API call
             await new Promise((resolve) => setTimeout(resolve, 1000))

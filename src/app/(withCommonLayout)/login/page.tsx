@@ -6,11 +6,16 @@ import { useState, type FormEvent } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Eye, EyeOff } from "lucide-react"
+import { useSelector } from "react-redux"
+import { RootState } from "@/redux/store"
 
 export default function LoginPage() {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
+    const user = useSelector((state: RootState) => state.user.users);
+
+    console.log(user, 'from here 5757sd')
 
     // Form state
     const [formData, setFormData] = useState({
